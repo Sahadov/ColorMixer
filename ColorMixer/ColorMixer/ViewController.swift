@@ -9,63 +9,93 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let topColor = UIView()
-    private let bottomColor = UIView()
+    private let topColorView = UIView.makeCircle(color: .black)
+    private let topColorButton = UIButton.makeRoundTransparentButton(title: "topColor")
+    private let bottomColorView = UIView.makeCircle(color: .red)
+    private let bottomColorButton = UIButton.makeRoundTransparentButton(title: "bottomColor")
     private let plusLabel = UILabel()
+    
+    var selectedButtonTitle: String?
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        setViews()
         setupLayout()
+        setupConstraints()
     }
-
-
 }
 
 private extension ViewController {
+    func setViews(){
+        [topColorView,
+         bottomColorView,
+         plusLabel
+        ].forEach { view.addSubview($0) }
+        
+        topColorView.addSubview(topColorButton)
+        bottomColorView.addSubview(bottomColorButton)
+    }
+    
     func setupLayout(){
         view.backgroundColor = .white
-        setTopColor()
-        setBottomColor()
+        setColorViews()
         setPlusLabel()
     }
-    func setTopColor(){
-        view.addSubview(topColor)
-        topColor.translatesAutoresizingMaskIntoConstraints = false
-        topColor.backgroundColor = .black
-        topColor.layer.cornerRadius = 100
-        
-        NSLayoutConstraint.activate([
-            topColor.widthAnchor.constraint(equalToConstant: 200),
-            topColor.heightAnchor.constraint(equalToConstant: 200),
-            topColor.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            topColor.topAnchor.constraint(equalTo: view.topAnchor, constant: 150)
-        ])
-    }
-    func setBottomColor(){
-        view.addSubview(bottomColor)
-        bottomColor.translatesAutoresizingMaskIntoConstraints = false
-        bottomColor.backgroundColor = .red
-        bottomColor.layer.cornerRadius = 100
-        
-        NSLayoutConstraint.activate([
-            bottomColor.widthAnchor.constraint(equalToConstant: 200),
-            bottomColor.heightAnchor.constraint(equalToConstant: 200),
-            bottomColor.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bottomColor.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150)
-        ])
-        
+    
+    func setColorViews(){
+        topColorButton.addTarget(self, action: #selector(topColorButtonTapped), for: .touchUpInside)
+        bottomColorButton.addTarget(self, action: #selector(topColorButtonTapped), for: .touchUpInside)
     }
     func setPlusLabel(){
-        view.addSubview(plusLabel)
         plusLabel.translatesAutoresizingMaskIntoConstraints = false
         plusLabel.text = "+"
         plusLabel.textColor = .black
         plusLabel.font = .systemFont(ofSize: 40)
-        
+    }
+    
+    func setupConstraints() {
         NSLayoutConstraint.activate([
+            topColorView.widthAnchor.constraint(equalToConstant: 200),
+            topColorView.heightAnchor.constraint(equalToConstant: 200),
+            topColorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            topColorView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            
+            topColorButton.centerXAnchor.constraint(equalTo: topColorView.centerXAnchor),
+            topColorButton.centerYAnchor.constraint(equalTo: topColorView.centerYAnchor),
+            topColorButton.widthAnchor.constraint(equalToConstant: 200),
+            topColorButton.heightAnchor.constraint(equalToConstant: 200),
+            
+            bottomColorView.widthAnchor.constraint(equalToConstant: 200),
+            bottomColorView.heightAnchor.constraint(equalToConstant: 200),
+            bottomColorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bottomColorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
+            
+            bottomColorButton.centerXAnchor.constraint(equalTo: bottomColorView.centerXAnchor),
+            bottomColorButton.centerYAnchor.constraint(equalTo: bottomColorView.centerYAnchor),
+            bottomColorButton.widthAnchor.constraint(equalToConstant: 200),
+            bottomColorButton.heightAnchor.constraint(equalToConstant: 200),
+            
             plusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             plusLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
+    }
+    
+    @objc func topColorButtonTapped(_ sender: UIButton){
+        selectedButtonTitle = sender.currentTitle
+        let colorPickerVC = UIColorPickerViewController()
+        colorPickerVC.delegate = self
+        present(colorPickerVC, animated: true)
+    }
+}
+
+extension ViewController: UIColorPickerViewControllerDelegate {
+    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+        
+        if selectedButtonTitle == "topColor" {
+            topColorView.backgroundColor = viewController.selectedColor
+        } else {
+            bottomColorView.backgroundColor = viewController.selectedColor
+        }
     }
 }

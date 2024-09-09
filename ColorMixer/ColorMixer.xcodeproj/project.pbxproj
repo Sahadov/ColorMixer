@@ -12,6 +12,8 @@
 		D122546F2C8EA9750002613A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D122546E2C8EA9750002613A /* ViewController.swift */; };
 		D12254742C8EA9790002613A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D12254732C8EA9790002613A /* Assets.xcassets */; };
 		D12254772C8EA9790002613A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D12254752C8EA9790002613A /* LaunchScreen.storyboard */; };
+		D122547F2C8EB8650002613A /* UIView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D122547E2C8EB8650002613A /* UIView_Extension.swift */; };
+		D12254812C8EBB250002613A /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12254802C8EBB250002613A /* UIButton_Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		D12254732C8EA9790002613A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D12254762C8EA9790002613A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D12254782C8EA9790002613A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D122547E2C8EB8650002613A /* UIView_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView_Extension.swift; sourceTree = "<group>"; };
+		D12254802C8EBB250002613A /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				D122546A2C8EA9750002613A /* AppDelegate.swift */,
+				D122547E2C8EB8650002613A /* UIView_Extension.swift */,
+				D12254802C8EBB250002613A /* UIButton_Extension.swift */,
 				D122546C2C8EA9750002613A /* SceneDelegate.swift */,
 				D122546E2C8EA9750002613A /* ViewController.swift */,
 				D12254732C8EA9790002613A /* Assets.xcassets */,
@@ -136,6 +142,8 @@
 			files = (
 				D122546F2C8EA9750002613A /* ViewController.swift in Sources */,
 				D122546B2C8EA9750002613A /* AppDelegate.swift in Sources */,
+				D122547F2C8EB8650002613A /* UIView_Extension.swift in Sources */,
+				D12254812C8EBB250002613A /* UIButton_Extension.swift in Sources */,
 				D122546D2C8EA9750002613A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
