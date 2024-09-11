@@ -38,17 +38,32 @@ class CustomColorCircle: UIView {
     }
     
     // MARK: - Initializers
-    init(width: CGFloat, buttonTitle: String?, color: UIColor?){
+    init(width: CGFloat, duration:CGFloat, buttonTitle: String?, color: UIColor?){
         super.init(frame: .zero)
         self.width = width
         self.color = color
         self.buttonTitle = buttonTitle
         setupLayOut()
         setConstraints()
+        startPulsation(duration: duration) // Start pulsation when view is initialized
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Pulsation Effect
+    func startPulsation(duration: CGFloat) {
+        let pulseAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 1.0
+        pulseAnimation.fromValue = duration  // Start at normal size
+        pulseAnimation.toValue = 1.1    // Scale to 10% larger
+        pulseAnimation.autoreverses = true  // Reverse the animation (shrink back to normal)
+        pulseAnimation.repeatCount = Float.infinity  // Infinite repetition
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            
+        // Add the animation to the colorView's layer
+        colorView.layer.add(pulseAnimation, forKey: "pulsation")
     }
 }
     
@@ -69,6 +84,7 @@ private extension CustomColorCircle {
         colorView.backgroundColor = color
         colorView.layer.cornerRadius = width / 2
         colorView.isUserInteractionEnabled = true
+        
     }
     
     func setColorLabel(){

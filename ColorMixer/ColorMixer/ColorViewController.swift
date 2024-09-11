@@ -9,10 +9,10 @@ import UIKit
 
 class ColorViewController: UIViewController {
     
-    private let topColorView = CustomColorCircle(width: K.topCircleWidth, buttonTitle: "topColor", color: .blue)
-    private let bottomColorView = CustomColorCircle(width: K.bottomCircleWidth, buttonTitle: "bottomColor", color: .green)
-    private let leftColorView = CustomColorCircle(width: K.leftCircleWidth, buttonTitle: "leftColor", color: .clear)
-    private let rightColorView = CustomColorCircle(width: K.rightCircleWidth, buttonTitle: "rightColor", color: .clear)
+    private let topColorView = CustomColorCircle(width: K.topCircleWidth, duration: 1.0, buttonTitle: "topColor", color: .blue)
+    private let bottomColorView = CustomColorCircle(width: K.bottomCircleWidth, duration: 1.15, buttonTitle: "bottomColor", color: .green)
+    private let leftColorView = CustomColorCircle(width: K.leftCircleWidth, duration: 1.0, buttonTitle: "leftColor", color: .clear)
+    private let rightColorView = CustomColorCircle(width: K.rightCircleWidth, duration: 1.2, buttonTitle: "rightColor", color: .clear)
     
     private let resultLabel = UILabel()
     private let plusButton = UIButton(type: .system)
