@@ -177,10 +177,21 @@ private extension ColorViewController {
         }
     }
     
-    @objc func mixColors(){
-        colorsArray = [topColorView.color!, bottomColorView.color!, leftColorView.color!, rightColorView.color!]
-        let resultedColor = blend(colors: colorsArray)
+    @objc func mixColors() {
+        let colors = getColors()
+        let resultedColor = blend(for: colors)
         updateColorUI(resultedColor)
+    }
+    
+    func getColors() -> [UIColor] {
+        colorsArray = [topColorView.color!, bottomColorView.color!]
+        if !leftColorView.isHidden {
+            colorsArray.append(leftColorView.color!)
+        }
+        if !rightColorView.isHidden {
+            colorsArray.append(rightColorView.color!)
+        }
+        return colorsArray
     }
     
     func updateResultLabelColor(_ color: UIColor){
@@ -219,7 +230,7 @@ private extension ColorViewController {
         
     }
     
-    func blend(colors: [UIColor]) -> UIColor {
+    func blend(for colors: [UIColor]) -> UIColor {
         let numberOfColors = CGFloat(colors.count)
         var (red, green, blue, alpha) = (CGFloat(0), CGFloat(0), CGFloat(0), CGFloat(0))
 
