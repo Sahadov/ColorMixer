@@ -9,6 +9,9 @@ import UIKit
 
 class ColorViewController: UIViewController {
     
+    private let colorManager = ColorManager()
+    
+// MARK: - Views
     private let topColorView = CustomColorCircle(width: K.topCircleWidth, duration: 1.0, buttonTitle: "topColor", color: .blue)
     private let bottomColorView = CustomColorCircle(width: K.bottomCircleWidth, duration: 1.15, buttonTitle: "bottomColor", color: .green)
     private let leftColorView = CustomColorCircle(width: K.leftCircleWidth, duration: 1.0, buttonTitle: "leftColor", color: .clear)
@@ -19,9 +22,14 @@ class ColorViewController: UIViewController {
     private let minusButton = UIButton(type: .system)
     private let mixButton = UIButton(type: .system)
     
+    
+// MARK: - Properties
     var selectedButtonTitle: String?
     var colorsArray = [UIColor]()
-        
+    
+    
+    
+// MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
@@ -30,6 +38,8 @@ class ColorViewController: UIViewController {
     }
 }
 
+
+// MARK: - Setup Layout and Views
 private extension ColorViewController {
     func setViews(){
         [topColorView,
@@ -98,7 +108,10 @@ private extension ColorViewController {
         resultLabel.font = .systemFont(ofSize: 20)
         resultLabel.numberOfLines = 0
     }
-    
+}
+
+// MARK: - Setup Constraints
+private extension ColorViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             topColorView.widthAnchor.constraint(equalToConstant: K.topCircleWidth),
@@ -138,6 +151,10 @@ private extension ColorViewController {
         ])
         
     }
+}
+
+// MARK: - Actions
+private extension ColorViewController {
     
     @objc func colorTapped(_ sender: UIButton){
         selectedButtonTitle = sender.currentTitle
@@ -152,7 +169,6 @@ private extension ColorViewController {
             leftColorView.colorName = leftColorView.color?.accessibilityName ?? "Secret"
             fadeInView(leftColorView)
             fadeInView(minusButton)
-            //minusButton.isHidden = false
             return
         }
         if rightColorView.isHidden {
@@ -182,7 +198,11 @@ private extension ColorViewController {
         let resultedColor = blend(for: colors)
         updateColorUI(resultedColor)
     }
+}
+
     
+// MARK: - Helpers
+private extension ColorViewController {
     func getColors() -> [UIColor] {
         colorsArray = [topColorView.color!, bottomColorView.color!]
         if !leftColorView.isHidden {
@@ -223,7 +243,6 @@ private extension ColorViewController {
         UIView.animate(withDuration: 0.5) {
             self.view.backgroundColor = color
         }
-        //view.backgroundColor = color
         updateResultLabelText()
         updateButtonsColors(color)
         updateResultLabelColor(color)
@@ -279,7 +298,5 @@ extension ColorViewController: UIColorPickerViewControllerDelegate {
             leftColorView.color = viewController.selectedColor
             leftColorView.colorName = leftColorView.color?.accessibilityName ?? "Secret"
         }
-        
-        //colorsArray = [topColorView.color!, bottomColorView.color!, leftColorView.color!, rightColorView.color!]
     }
 }
